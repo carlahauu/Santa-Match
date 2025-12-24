@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-if host in ["localhost", "127.0.0.1", None]:
+if os.getenv('POSTGRES_HOST') in ["localhost", "127.0.0.1", None]:
     ssl_params = ""
 else:
     ssl_params = "?sslmode=require&channel_binding=require"
