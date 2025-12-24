@@ -8,6 +8,20 @@ import random
 router = APIRouter(prefix="/groups", tags=["Groups"])
 
 
+@router.get("/{token}", response_model=schemas.GroupOut)
+def get_group(token: str, response: Response, db: Session = Depends(get_db)):
+    group = db.query(models.Group).filter(models.Group.token == token).first()
+
+    if not group:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Group was not found with token: {token}",
+        )
+
+    return group
+
+
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.GroupOut)
 def create_group(group: schemas.GroupCreate, db: Session = Depends(get_db)):
 
@@ -65,6 +79,7 @@ def create_group(group: schemas.GroupCreate, db: Session = Depends(get_db)):
                 )
                 db.add(new_participant)
             db.commit()
+            db.refresh(new_group)
             pairings_finalized = True
 
     return new_group
