@@ -16,7 +16,7 @@ SQLALCHEMY_DATABASE_URL = (
     f"{os.getenv('POSTGRES_USER')}:"
     f"{os.getenv('POSTGRES_PASSWORD')}@"
     f"{os.getenv('POSTGRES_HOST')}/"
-    f"{os.getenv('POSTGRES_DB')}?sslmode=require&channel_binding=require"
+    f"{os.getenv('POSTGRES_DB')}{ssl_params}"
 )
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
