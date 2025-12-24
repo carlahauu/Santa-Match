@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+if host in ["localhost", "127.0.0.1", None]:
+    ssl_params = ""
+else:
+    ssl_params = "?sslmode=require&channel_binding=require"
+
 SQLALCHEMY_DATABASE_URL = (
     f"postgresql+psycopg://"
     f"{os.getenv('POSTGRES_USER')}:"
