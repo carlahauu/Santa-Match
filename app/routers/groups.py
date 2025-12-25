@@ -83,3 +83,23 @@ def create_group(group: schemas.GroupCreate, db: Session = Depends(get_db)):
             pairings_finalized = True
 
     return new_group
+
+
+@router.delete("/{token}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_group(token: str, db: Session = Depends(get_db)):
+    group_query = db.query(models.Group).filter(models.Group.token == token)
+
+    if group_query.first() == None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Group was not found with token: {token}",
+        )
+
+    db.query(models.Participant).filter(models.Participant.group_token == token).delete(
+        synchronize_session=False
+    )
+
+    group_query.delete(synchronize_session=False)
+    db.commit()
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
