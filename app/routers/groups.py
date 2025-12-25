@@ -103,3 +103,22 @@ def delete_group(token: str, db: Session = Depends(get_db)):
     db.commit()
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.post("/{token}", status_code=status.HTTP_204_NO_CONTENT)
+def update_group_name(
+    token: str, updated_name: schemas.GroupUpdate, db: Session = Depends(get_db)
+):
+    group_query = db.query(models.Group).filter(models.Group.token == token)
+
+    if group_query.first() == None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Group was not found with token: {token}",
+        )
+
+    group_query.update({"name": updated_name.name}, synchronize_session=False)
+
+    db.commit()
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
