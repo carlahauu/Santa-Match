@@ -1,5 +1,63 @@
 from ..models import Participant
 
+def test_update_group_name(client, standard_payload):
+    new_group = client.post("/groups", json=standard_payload)
+    assert new_group.status_code == 201
+
+    response = client.put(f"/groups/{new_group.json()["token"]}", json={
+        "name": "Updated Secret Santa 2025"
+    })
+    assert response.status_code == 200
+    assert response.json()["name"] == "Updated Secret Santa 2025"
+
+def test_update_group_budget(client, standard_payload):
+    new_group = client.post("/groups", json=standard_payload)
+    assert new_group.status_code == 201
+
+    response = client.put(f"/groups/{new_group.json()["token"]}", json={
+        "budget": 5
+    })
+    assert response.status_code == 200
+    assert response.json()["budget"] == 5
+
+def test_update_group_budget(client, standard_payload):
+    new_group = client.post("/groups", json=standard_payload)
+    assert new_group.status_code == 201
+
+    response = client.put(f"/groups/{new_group.json()["token"]}", json={
+        "name": "Updated Secret Santa 2025", 
+        "budget": 5
+    })
+    assert response.status_code == 200
+    assert response.json()["budget"] == 5
+    assert response.json()["name"] == "Updated Secret Santa 2025"
+
+def test_update_invalid_group(client):
+    response = client.put("/groups/this-token-does-not-exist", json={})
+    assert response.status_code == 404
+
+    data = response.json()
+
+    assert data["detail"] == "Group was not found with token: this-token-does-not-exist"
+
+def test_delete_group(client, standard_payload):
+    new_group = client.post("/groups", json=standard_payload)
+    assert new_group.status_code == 201 
+
+    response = client.delete(f"/groups/{new_group.json()["token"]}")
+    assert response.status_code == 204
+
+    assert client.get(f"/groups/{new_group.json()["token"]}").status_code == 404
+
+
+def test_delete_invalid_group(client):
+    response = client.delete("/groups/this-token-does-not-exist")
+    assert response.status_code == 404
+
+    data = response.json()
+
+    assert data["detail"] == "Group was not found with token: this-token-does-not-exist"
+
 
 def test_get_group_not_found(client):
     response = client.get("/groups/this-token-does-not-exist")
@@ -15,7 +73,7 @@ def test_get_group_successful(client, standard_payload):
 
     new_group = client.post("/groups", json=payload)
 
-    response = client.get(f"/groups/{new_group.json().get('token')}")
+    response = client.get(f"/groups/{new_group.json()['token']}")
 
     data = response.json()
 
