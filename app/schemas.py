@@ -26,6 +26,10 @@ class GroupBase(BaseModel):
     budget: int
 
 
+class GroupUpdate(BaseModel):
+    name: str
+
+
 class GroupCreate(GroupBase):
     participants: list[ParticipantCreate]
 
