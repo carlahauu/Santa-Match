@@ -20,7 +20,7 @@ def test_update_group_budget(client, standard_payload):
     assert response.status_code == 200
     assert response.json()["budget"] == 5
 
-def test_update_group_budget(client, standard_payload):
+def test_update_group(client, standard_payload):
     new_group = client.post("/groups", json=standard_payload)
     assert new_group.status_code == 201
 
