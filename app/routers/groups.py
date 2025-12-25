@@ -109,8 +109,7 @@ def delete_group(token: str, db: Session = Depends(get_db)):
 def update_group(
     token: str, updated_group: schemas.GroupUpdate, db: Session = Depends(get_db)
 ):
-    group_query = db.query(models.Group).filter(models.Group.token == token)
-    group = group_query.first()
+    group = db.query(models.Group).filter(models.Group.token == token).first()
 
     if group == None:
         raise HTTPException(
@@ -119,16 +118,10 @@ def update_group(
         )
 
     if updated_group.name is not None:
-        group_query.update(
-            {"name": updated_group.name},
-            synchronize_session=False,
-        )
+        group.name = updated_group.name
 
     if updated_group.budget is not None:
-        group_query.update(
-            {"budget": updated_group.budget},
-            synchronize_session=False,
-        )
+        group.budget = updated_group.budget
 
     db.commit()
     db.refresh(group)
