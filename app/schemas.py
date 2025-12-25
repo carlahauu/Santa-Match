@@ -21,10 +21,6 @@ class ParticipantMatchOut(BaseModel):
     assigned_to: str
 
 
-class ParticipantMatchIn(BaseModel):
-    token: str
-
-
 class GroupBase(BaseModel):
     name: str
     budget: int
