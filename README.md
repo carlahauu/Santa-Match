@@ -1,7 +1,7 @@
 <h1 align="center">SantaMatch</h1>
 
 <div>
-  <p align="center">Secret Santa made easy! Add names, set a budget, share the link, and let the gifting begin!</p>
+  <p align="center">Secret Santa made easy! Add participants, set a budget, share the link, and let the gifting begin!</p>
 </div>
 
 ### Documentation
