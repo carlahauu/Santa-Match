@@ -61,11 +61,13 @@ def create_group(group: schemas.GroupCreate, db: Session = Depends(get_db)):
         for i in range(len(recipients)):
             santa = group.participants[i]
             receiver = recipients[i]
-            excluded_participant = (santa.exclude_participant_name or "").strip()
+            excluded_participant = (
+                (santa.exclude_participant_name or "").strip().lower()
+            )
 
             if (
-                santa.name.strip() == receiver.name.strip()
-                or receiver.name.strip() == excluded_participant
+                santa.name.strip().lower() == receiver.name.strip().lower()
+                or receiver.name.strip().lower() == excluded_participant
             ):
                 is_valid = False
                 break
