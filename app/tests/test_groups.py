@@ -10,16 +10,8 @@ def test_get_group_not_found(client):
     assert data["detail"] == "Group was not found with token: this-token-does-not-exist"
 
 
-def test_get_group_successful(client):
-    payload = {
-        "name": "Secret Santa",
-        "budget": 100,
-        "participants": [
-            {"name": "Bob"},
-            {"name": "Alice"},
-            {"name": "Max"},
-        ],
-    }
+def test_get_group_successful(client, standard_payload):
+    payload = standard_payload
 
     new_group = client.post("/groups", json=payload)
 
@@ -88,12 +80,8 @@ def test_create_group_no_matches_available(client):
     )
 
 
-def test_create_group(client):
-    payload = {
-        "name": "Secret Santa",
-        "budget": 100,
-        "participants": [{"name": "Bob"}, {"name": "John"}, {"name": "Max"}],
-    }
+def test_create_group(client, standard_payload):
+    payload = standard_payload
 
     response = client.post("/groups", json=payload)
 
@@ -110,7 +98,7 @@ def test_create_group(client):
 
     names = [p["name"] for p in data["participants"]]
     assert "Bob" in names
-    assert "John" in names
+    assert "Alice" in names
     assert "Max" in names
 
     for participant in data["participants"]:
