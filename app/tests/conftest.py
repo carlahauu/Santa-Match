@@ -11,6 +11,19 @@ random.seed(42)
 
 
 @pytest.fixture
+def standard_payload():
+    return {
+        "name": "Secret Santa",
+        "budget": 100,
+        "participants": [
+            {"name": "Bob"},
+            {"name": "Alice"},
+            {"name": "Max"},
+        ],
+    }
+
+
+@pytest.fixture
 def db():
     if os.getenv("POSTGRES_HOST") in ["localhost", "127.0.0.1", None]:
         ssl_params = ""
