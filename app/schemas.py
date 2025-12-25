@@ -27,7 +27,8 @@ class GroupBase(BaseModel):
 
 
 class GroupUpdate(BaseModel):
-    name: str
+    name: Optional[str] = None
+    budget: Optional[int] = None
 
 
 class GroupCreate(GroupBase):
