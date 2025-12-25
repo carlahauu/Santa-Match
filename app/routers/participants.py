@@ -41,7 +41,7 @@ def reveal_match(token: str, db: Session = Depends(get_db)):
             detail=f"{participant.name}'s match has already been viewed. Match can only be viewed once.",
         )
 
-    participant_query.update({"revealed": True}, synchronize_session=False)
+    participant.revealed = True
 
     db.commit()
     db.refresh(participant)
