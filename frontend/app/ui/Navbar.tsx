@@ -1,8 +1,6 @@
-// components/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const navItems = [
@@ -11,51 +9,44 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-sky-200 mx-auto p-4 px-10 sticky z-50 top-10 rounded-full md:w-[65%] w-[85%]">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-lg font-semibold">
-          SantaMatch
-        </Link>
-        <div className="hidden md:flex space-x-10">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`text-md hover:text-sky-600 hover:border-b-1 border-sky-600 ${
-                pathname === item.href ? 'text-blue-400' : ''
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
+    <div className="justify-center items-center flex flex-col mt-10">
+      <nav className="bg-sky-200 mx-auto p-4 px-10 sticky z-50 rounded-full md:w-[65%] w-[90%]">
+        <div className="mx-auto flex justify-between items-center">
+          <Link href="/" className="text-lg font-semibold">
+            SantaMatch
+          </Link>
+          <div className="hidden md:flex space-x-10">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`text-md hover:text-sky-600 hover:border-b-1 border-sky-600`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+          <div className="md:hidden">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? 'Close' : 'Menu'}
+            </button>
+          </div>
         </div>
-        {/* Mobile menu toggle (example) */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? 'Close' : 'Menu'}
-          </button>
-        </div>
+      </nav>
+      <div className="fixed md:w-[65%] mt-30 rounded-b-xl w-[90%] bg-sky-200/50">
+        {isMenuOpen && (
+          <div className="flex md:hidden mt-10 mb-3 px-10 flex-col items-end">
+            {navItems.map((item) => (
+              <Link key={item.name} href={item.href} className="w-fit py-1">
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
-      {/* Mobile menu content (can be styled further) */}
-      {isMenuOpen && (
-        <div className="md:hidden">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="block text-white py-2"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      )}
-    </nav>
+    </div>
   );
 }
