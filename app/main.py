@@ -1,13 +1,18 @@
-from fastapi import FastAPI, Response, status, HTTPException, Depends
-import psycopg
-from psycopg import Connection
-from . import models, schemas
-from .database import engine, get_db
-from sqlalchemy.orm import Session
-from typing import List
+from fastapi import FastAPI
+from . import models
+from .database import engine
 from .routers import participants, groups
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 models.Base.metadata.create_all(bind=engine)
 
