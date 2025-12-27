@@ -9,10 +9,6 @@ export default function ViewMatch() {
 
   const router = useRouter();
 
-  const handleChange = (value: string) => {
-    setUrl(value);
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
@@ -46,6 +42,7 @@ export default function ViewMatch() {
             className="w-full mt-2 px-3 py-2 rounded-lg bg-white"
             placeholder="https://santamatch.carlahau.com/view-group/random-token"
             value={url}
+            required
             onChange={(e) => setUrl(e.target.value)}
           />
           <button

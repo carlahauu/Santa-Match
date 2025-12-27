@@ -1,6 +1,7 @@
 'use client';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Group {
   name: string;
@@ -20,8 +21,11 @@ export default function ViewMatch() {
   const token = params.token;
   const [groupData, setGroupData] = useState<Group | null>(null);
   const [copied, setCopied] = useState(false);
+  const [selectedParticipant, setSelectedParticipant] =
+    useState<Participant | null>(null);
 
   const [url, setUrl] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     setUrl(window.location.href);
@@ -43,6 +47,14 @@ export default function ViewMatch() {
         setTimeout(() => setCopied(false), 2000);
       })
       .catch((err) => console.error('Failed to copy: ', err));
+  };
+
+  const openModal = (participant: Participant) => {
+    setSelectedParticipant(participant);
+  };
+
+  const revealMatch = (token: string) => {
+    router.push(`/reveal/${token}`);
   };
 
   return (
@@ -78,9 +90,6 @@ export default function ViewMatch() {
               <div className="flex flex-row w-full justify-between mb-3">
                 <p className="text-lg">{participant.name}</p>
                 <div className="flex space-x-3">
-                  <button className="hover:cursor-pointer bg-sky-700 text-white rounded-full py-3 px-3">
-                    View Match
-                  </button>
                   {participant.revealed ? (
                     <>
                       <button className="bg-sky-200 text-sm text-black px-3 rounded-full py-3">
@@ -89,6 +98,12 @@ export default function ViewMatch() {
                     </>
                   ) : (
                     <>
+                      <button
+                        onClick={() => openModal(participant)}
+                        className="hover:cursor-pointer bg-sky-700 text-white rounded-full py-3 px-3"
+                      >
+                        View Match
+                      </button>
                       <button className="bg-red-500 text-sm text-white px-3 rounded-full py-3">
                         Not Viewed Yet
                       </button>
@@ -100,6 +115,34 @@ export default function ViewMatch() {
           ))}
         </div>
       </main>
+      {selectedParticipant && (
+        <div className="fixed bg-sky-200 flex items-center rounded-lg justify-center z-50 p-4">
+          <div className="p-8 max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-4 text-black">
+              Are you {selectedParticipant.name}?
+            </h2>
+            <p className="text-black mb-6">
+              You can only reveal your match{' '}
+              <span className="font-bold text-red-600">once</span>. Make sure
+              you are selecting your own name!
+            </p>
+            <div className="flex flex-col space-y-3">
+              <button
+                onClick={() => revealMatch(selectedParticipant.token)}
+                className="bg-sky-900 text-white rounded-full font-bold py-3 hover:cursor:pointer"
+              >
+                Yes, Reveal My Match
+              </button>
+              <button
+                onClick={() => setSelectedParticipant(null)}
+                className="text-white rounded-full hover:cursor:pointer bg-red-500"
+              >
+                No, go back
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
