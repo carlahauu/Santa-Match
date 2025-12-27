@@ -26,11 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <div className="absolute -z-10 inset-0 h-full w-full bg-[linear-gradient(to_right,#73737320_1px,transparent_1px),linear-gradient(to_bottom,#73737320_1px,transparent_1px)] bg-[size:25px_25px]" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased`}
         suppressHydrationWarning={true}
       >
+        <div className="absolute -z-10 inset-0 h-full w-full bg-[linear-gradient(to_right,#73737320_1px,transparent_1px),linear-gradient(to_bottom,#73737320_1px,transparent_1px)] bg-[size:25px_25px]" />
         <Navbar />
         {children}
       </body>
