@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -17,9 +18,11 @@ export default function Home() {
             Secret Santa made easy! Add participants, set a budget, share the
             link, and let the gifting begin! No accounts required.
           </p>
-          <button className="w-full text-lg hover:cursor-pointer bg-sky-200 px-10 py-2 rounded-full mt-8">
-            Get Started!
-          </button>
+          <Link href="/create-group">
+            <button className="w-full text-lg hover:cursor-pointer bg-sky-200 px-10 py-2 rounded-full mt-8">
+              Get Started!
+            </button>
+          </Link>
         </div>
       </main>
     </div>
