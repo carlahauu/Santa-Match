@@ -3,6 +3,7 @@ from . import models
 from .database import engine
 from .routers import participants, groups
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 
@@ -23,3 +24,6 @@ app.include_router(groups.router)
 @app.get("/")
 def root():
     return {"message": "Hello World"}
+
+
+Instrumentator().instrument(app).expose(app)
