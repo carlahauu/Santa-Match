@@ -11,16 +11,24 @@ export default function ViewMatch() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
+    setError('');
+    try {
+      const inputtedURL = new URL(url);
+      const pathName = inputtedURL.pathname;
+      const pathnameArray = pathName.split('/');
+      console.log(pathnameArray);
 
-    const trimmedInput = url.trim();
-
-    const token = trimmedInput.split('/').pop();
-
-    if (token) {
-      router.push(`/view-group/${token}`);
-    } else {
-      setError('Please enter a valid link or token.');
+      if (pathnameArray[1] == 'view-group' && pathnameArray[2]) {
+        router.push(`/view-group/${pathnameArray[2]}`);
+      } else {
+        setError(
+          'Please enter a valid link. The link should look like https://santamatch.carlahau.com/view-group/randomToken.'
+        );
+      }
+    } catch {
+      setError(
+        'Please enter a valid link. The link should look like https://santamatch.carlahau.com/view-group/randomToken'
+      );
     }
   };
 
@@ -45,6 +53,7 @@ export default function ViewMatch() {
             required
             onChange={(e) => setUrl(e.target.value)}
           />
+          {error ? <p className="text-red-600 mt-2">{error}</p> : <></>}
           <button
             type="submit"
             className="mt-4 w-full bg-sky-900 hover:cursor-pointer hover:bg-sky-950 text-white font-semibold rounded-lg py-2 transition"

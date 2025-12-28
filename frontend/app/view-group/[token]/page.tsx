@@ -22,6 +22,7 @@ export default function ViewMatch() {
   const [groupData, setGroupData] = useState<Group | null>(null);
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [selectedParticipant, setSelectedParticipant] =
     useState<Participant | null>(null);
 
@@ -31,15 +32,38 @@ export default function ViewMatch() {
   useEffect(() => {
     setUrl(window.location.href);
   }, []);
-
   useEffect(() => {
     if (!token) return;
-    setLoading(true);
 
-    fetch(`https://santa-match.onrender.com/groups/${token}`)
-      .then((res) => res.json())
-      .then((data) => setGroupData(data))
-      .then(() => setLoading(false));
+    const fetchGroup = async () => {
+      setLoading(true);
+
+      try {
+        const res = await fetch(
+          `https://santa-match.onrender.com/groups/${token}`
+        );
+
+        if (!res.ok) {
+          if (res.status === 404) {
+            throw new Error(
+              `Group was not found with token: ${token}. Please ensure the link is correct.`
+            );
+          }
+          throw new Error('Something went wrong');
+        }
+
+        const data = await res.json();
+        setGroupData(data);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGroup();
   }, [token]);
 
   const handleCopy = () => {
@@ -63,62 +87,70 @@ export default function ViewMatch() {
   return (
     <div className="flex items-center justify-center font-sans py-15">
       {!loading ? (
-        <main className="flex md:w-[60%] lg:w-[40%] w-[85%] flex-col">
-          <h1 className="text-2xl font-bold text-center">{groupData?.name}</h1>
-          <div className="flex mb-3 justify-center items-center space-x-3">
-            {groupData?.budget == 0 ? (
-              <p>No Budget</p>
-            ) : (
-              <p>Budget: ${groupData?.budget}</p>
-            )}
-            <p>Total Participants: {groupData?.participants.length}</p>
-          </div>
-          <p className="text-center mb-3">
-            Copy the link below and share with other participants so they can
-            view their match!
-          </p>
-          <div className="flex mb-3 space-x-3">
-            <p className="flex-1 px-3 py-2 rounded-lg bg-sky-200 text-sm">
-              {url}
-            </p>
-            <button
-              onClick={handleCopy}
-              className="bg-sky-700 hover:bg-sky-800 text-white font-semibold py-3 px-3 rounded-lg"
-            >
-              {copied ? 'Link Copied!' : 'Copy Link'}
-            </button>
-          </div>
-          <div>
-            {groupData?.participants.map((participant, index) => (
-              <div key={index}>
-                <div className="flex flex-row w-full justify-between mb-3">
-                  <p className="text-lg">{participant.name}</p>
-                  <div className="flex space-x-3">
-                    {participant.revealed ? (
-                      <>
-                        <button className="bg-sky-200 text-sm text-black px-3 rounded-full py-3">
-                          Already Viewed
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => openModal(participant)}
-                          className="hover:cursor-pointer bg-sky-700 text-white rounded-full py-3 px-3"
-                        >
-                          View Match
-                        </button>
-                        <button className="bg-red-500 text-sm text-white px-3 rounded-full py-3">
-                          Not Viewed Yet
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </div>
+        <>
+          {error ? (
+            <p>{error}</p>
+          ) : (
+            <main className="flex md:w-[60%] lg:w-[40%] w-[85%] flex-col">
+              <h1 className="text-2xl font-bold text-center">
+                {groupData?.name}
+              </h1>
+              <div className="flex mb-3 justify-center items-center space-x-3">
+                {groupData?.budget == 0 ? (
+                  <p>No Budget</p>
+                ) : (
+                  <p>Budget: ${groupData?.budget}</p>
+                )}
+                <p>Total Participants: {groupData?.participants.length}</p>
               </div>
-            ))}
-          </div>
-        </main>
+              <p className="text-center mb-3">
+                Copy the link below and share with other participants so they
+                can view their match!
+              </p>
+              <div className="flex mb-3 space-x-3">
+                <p className="flex-1 px-3 py-2 rounded-lg bg-sky-200 text-sm">
+                  {url}
+                </p>
+                <button
+                  onClick={handleCopy}
+                  className="bg-sky-700 hover:bg-sky-800 text-white font-semibold py-3 px-3 rounded-lg"
+                >
+                  {copied ? 'Link Copied!' : 'Copy Link'}
+                </button>
+              </div>
+              <div>
+                {groupData?.participants.map((participant, index) => (
+                  <div key={index}>
+                    <div className="flex flex-row w-full justify-between mb-3">
+                      <p className="text-lg">{participant.name}</p>
+                      <div className="flex space-x-3">
+                        {participant.revealed ? (
+                          <>
+                            <button className="bg-sky-200 text-sm text-black px-3 rounded-full py-3">
+                              Already Viewed
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              onClick={() => openModal(participant)}
+                              className="hover:cursor-pointer bg-sky-700 text-white rounded-full py-3 px-3"
+                            >
+                              View Match
+                            </button>
+                            <button className="bg-red-500 text-sm text-white px-3 rounded-full py-3">
+                              Not Viewed Yet
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </main>
+          )}
+        </>
       ) : (
         <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center">
           <div className="flex space-x-2 text-sky-900">
