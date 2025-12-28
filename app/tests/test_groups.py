@@ -1,5 +1,26 @@
 from ..models import Participant
 
+def test_excluded_participant_not_a_partcipant(client): 
+    response = client.post("/groups", json=
+    {
+        "name": "Test Invalid Exclude Participant", 
+        "budget": 100, 
+        "participants": [
+            {
+                "name": "Bob", "exclude_participant_name": "Alice"
+            }, 
+            {
+                "name": "John"
+            }, 
+            {
+                "name": "Max"
+            }
+        ]
+    })
+
+    assert response.status_code == 400
+    assert "is not in the group:" in response.json()["detail"]
+
 def test_update_group_name(client, standard_payload):
     new_group = client.post("/groups", json=standard_payload)
     assert new_group.status_code == 201

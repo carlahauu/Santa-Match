@@ -38,6 +38,14 @@ def create_group(group: schemas.GroupCreate, db: Session = Depends(get_db)):
             status_code=400, detail="At least 3 participants are required."
         )
 
+    for participant in group.participants:
+        excluded = (participant.exclude_participant_name or "").strip().lower()
+        if excluded and excluded not in participant_names:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Excluded participant '{participant.exclude_participant_name}' is not in the group: '{group.name}'.",
+            )
+
     new_group = models.Group(name=group.name, budget=group.budget)
 
     db.add(new_group)
