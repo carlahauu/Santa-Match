@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 3600s  # every hour
+
+scrape_configs:
+  - job_name: 'render_fastapi'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['santa-match.onrender.com']
