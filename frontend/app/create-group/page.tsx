@@ -77,7 +77,7 @@ export default function CreateGroup() {
   return (
     <div className="flex items-center justify-center font-sans py-15">
       {!loading ? (
-        <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col">
+        <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col mt-25">
           <h1 className="text-center text-2xl font-bold mb-6">Create Group</h1>
           <form onSubmit={handleSubmit} className="bg-sky-200 rounded-lg p-6">
             <label className="block text-sm font-medium mb-1">Group Name</label>
@@ -154,7 +154,7 @@ export default function CreateGroup() {
           </form>
         </main>
       ) : (
-        <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center">
+        <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center mt-40">
           <div className="flex space-x-2 text-sky-900">
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>

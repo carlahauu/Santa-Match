@@ -34,7 +34,7 @@ export default function ViewMatch() {
 
   return (
     <div className="flex items-center justify-center font-sans py-15">
-      <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col">
+      <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col mt-35">
         <h1 className="text-center text-2xl font-bold mb-1">
           View Group/Match
         </h1>
