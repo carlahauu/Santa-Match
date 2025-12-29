@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <div className="justify-center items-center flex flex-col mt-10">
       <footer className="flex flex-col bg-sky-200 mx-auto p-4 px-10 z-50 w-full">
-        <div className="mx-auto flex mb-3 md:justify-between md:w-full">
+        <div className="mx-auto flex mb-3 md:justify-between">
           <div className="flex flex-col md:flex-row text-center gap-4">
             {footerItems.map((item) => (
               <Link
