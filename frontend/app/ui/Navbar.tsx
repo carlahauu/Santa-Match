@@ -12,7 +12,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="justify-center items-center flex flex-col mt-10">
+    <div className="fixed w-full justify-center items-center flex flex-col mt-10">
       <nav className="bg-sky-200 mx-auto p-4 px-10 sticky z-50 rounded-full md:w-[65%] w-[90%]">
         <div className="mx-auto flex justify-between items-center">
           <Link href="/" className="text-lg font-semibold">
