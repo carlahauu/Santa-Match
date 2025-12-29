@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from app.database import Base, get_db
 from app.main import app
 from fastapi.testclient import TestClient
+from ..rate_limiting import rate_limiter
 import os
 import random
 
@@ -59,6 +60,11 @@ def client(db):
             yield db
         finally:
             db.close()
+
+    def override_rate_limiter():
+        pass
+
+    app.dependency_overrides[rate_limiter] = override_rate_limiter
 
     app.dependency_overrides[get_db] = override_get_db
     return TestClient(app)
