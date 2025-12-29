@@ -1,19 +1,20 @@
 from .. import models, schemas
-from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
+from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
 from sqlalchemy.orm import Session
-from typing import List
 import random
+from ..rate_limiting import rate_limiter
 
 router = APIRouter(prefix="/groups", tags=["Groups"])
 
 
-@router.get("/{token}", response_model=schemas.GroupOut)
-def get_group(token: str, response: Response, db: Session = Depends(get_db)):
+@router.get(
+    "/{token}", response_model=schemas.GroupOut, dependencies=[Depends(rate_limiter)]
+)
+def get_group(token: str, db: Session = Depends(get_db)):
     group = db.query(models.Group).filter(models.Group.token == token).first()
 
     if not group:
-        response.status_code = status.HTTP_404_NOT_FOUND
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Group was not found with token: {token}",
@@ -22,7 +23,12 @@ def get_group(token: str, response: Response, db: Session = Depends(get_db)):
     return group
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.GroupOut)
+@router.post(
+    "/",
+    status_code=status.HTTP_201_CREATED,
+    response_model=schemas.GroupOut,
+    dependencies=[Depends(rate_limiter)],
+)
 def create_group(group: schemas.GroupCreate, db: Session = Depends(get_db)):
 
     participant_names = [p.name.lower() for p in group.participants]
@@ -95,7 +101,11 @@ def create_group(group: schemas.GroupCreate, db: Session = Depends(get_db)):
     return new_group
 
 
-@router.delete("/{token}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete(
+    "/{token}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    dependencies=[Depends(rate_limiter)],
+)
 def delete_group(token: str, db: Session = Depends(get_db)):
     group_query = db.query(models.Group).filter(models.Group.token == token)
 
@@ -115,7 +125,9 @@ def delete_group(token: str, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.put("/{token}", response_model=schemas.GroupOut)
+@router.put(
+    "/{token}", response_model=schemas.GroupOut, dependencies=[Depends(rate_limiter)]
+)
 def update_group(
     token: str, updated_group: schemas.GroupUpdate, db: Session = Depends(get_db)
 ):
