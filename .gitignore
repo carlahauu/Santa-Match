@@ -5,3 +5,5 @@ __pycache__/
 .coverage 
 cov_html
 htmlcov
+lambda_package.zip
+package
