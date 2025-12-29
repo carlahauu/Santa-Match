@@ -92,7 +92,7 @@ export default function ViewMatch() {
             <p>{error}</p>
           ) : (
             <main className="flex md:w-[60%] lg:w-[40%] w-[85%] flex-col">
-              <h1 className="text-2xl font-bold text-center">
+              <h1 className="text-2xl font-bold text-center mt-30">
                 {groupData?.name}
               </h1>
               <div className="flex mb-3 justify-center items-center space-x-3">
@@ -108,7 +108,7 @@ export default function ViewMatch() {
                 can view their match!
               </p>
               <div className="flex mb-3 space-x-3">
-                <p className="flex-1 px-3 py-2 rounded-lg bg-sky-200 text-sm">
+                <p className="flex-1 px-3 py-3 rounded-lg bg-sky-200 text-sm">
                   {url}
                 </p>
                 <button
@@ -118,15 +118,15 @@ export default function ViewMatch() {
                   {copied ? 'Link Copied!' : 'Copy Link'}
                 </button>
               </div>
-              <div>
+              <div className="mt-4">
                 {groupData?.participants.map((participant, index) => (
                   <div key={index}>
                     <div className="flex flex-row w-full justify-between mb-3">
-                      <p className="text-lg">{participant.name}</p>
+                      <p className="text-lg mt-1">{participant.name}</p>
                       <div className="flex space-x-3">
                         {participant.revealed ? (
                           <>
-                            <button className="bg-sky-200 text-sm text-black px-3 rounded-full py-3">
+                            <button className="bg-sky-200 text-sm text-black px-3 rounded-full py-2">
                               Already Viewed
                             </button>
                           </>
@@ -134,11 +134,11 @@ export default function ViewMatch() {
                           <>
                             <button
                               onClick={() => openModal(participant)}
-                              className="hover:cursor-pointer bg-sky-700 text-white rounded-full py-3 px-3"
+                              className="hover:cursor-pointer text-sm bg-sky-700 text-white rounded-full py-2 px-3"
                             >
                               View Match
                             </button>
-                            <button className="bg-red-500 text-sm text-white px-3 rounded-full py-3">
+                            <button className="bg-red-500 text-sm text-white px-3 rounded-full py-2">
                               Not Viewed Yet
                             </button>
                           </>
@@ -153,7 +153,7 @@ export default function ViewMatch() {
         </>
       ) : (
         <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center">
-          <div className="flex space-x-2 text-sky-900">
+          <div className="flex space-x-2 text-sky-900 mt-25">
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
@@ -164,26 +164,26 @@ export default function ViewMatch() {
         </main>
       )}
       {selectedParticipant && (
-        <div className="fixed bg-sky-200 flex items-center rounded-lg justify-center z-50 p-4">
+        <div className="fixed bg-sky-200 flex items-center rounded-lg justify-center z-50 p-4 mt-25">
           <div className="p-8 max-w-sm w-full text-center">
             <h2 className="text-xl font-bold mb-4 text-black">
               Are you {selectedParticipant.name}?
             </h2>
             <p className="text-black mb-6">
               You can only reveal your match{' '}
-              <span className="font-bold text-red-600">once</span>. Make sure
+              <span className="font-bold text-red-600">ONCE!</span> Make sure
               you are selecting your own name!
             </p>
             <div className="flex flex-col space-y-3">
               <button
                 onClick={() => revealMatch(selectedParticipant.token)}
-                className="bg-sky-900 text-white rounded-full font-bold py-3 hover:cursor:pointer"
+                className="bg-sky-900 text-white rounded-full font-bold py-3 hover:cursor-pointer"
               >
-                Yes, Reveal My Match
+                Yes, reveal my match
               </button>
               <button
                 onClick={() => setSelectedParticipant(null)}
-                className="text-white rounded-full hover:cursor:pointer bg-red-500"
+                className="text-white rounded-full font-bold hover:cursor-pointer bg-red-500 py-3"
               >
                 No, go back
               </button>
