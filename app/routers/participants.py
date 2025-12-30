@@ -2,11 +2,16 @@ from .. import models, schemas
 from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
 from sqlalchemy.orm import Session
+from ..rate_limiting import rate_limiter
 
 router = APIRouter(prefix="/participants", tags=["Participants"])
 
 
-@router.get("/{token}", response_model=schemas.ParticipantOut)
+@router.get(
+    "/{token}",
+    response_model=schemas.ParticipantOut,
+    dependencies=[Depends(rate_limiter)],
+)
 def get_participant(token: str, db: Session = Depends(get_db)):
     participant = (
         db.query(models.Participant).filter(models.Participant.token == token).first()
@@ -21,7 +26,11 @@ def get_participant(token: str, db: Session = Depends(get_db)):
     return participant
 
 
-@router.post("/reveal/{token}", response_model=schemas.ParticipantMatchOut)
+@router.post(
+    "/reveal/{token}",
+    response_model=schemas.ParticipantMatchOut,
+    dependencies=[Depends(rate_limiter)],
+)
 def reveal_match(token: str, db: Session = Depends(get_db)):
     participant_query = db.query(models.Participant).filter(
         models.Participant.token == token

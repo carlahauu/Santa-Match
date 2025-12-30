@@ -7,3 +7,4 @@ cov_html
 htmlcov
 lambda_package.zip
 package
+.nyc_output
