@@ -35,8 +35,8 @@ export default function Home() {
           height={0}
         />
         <div className="md:ml-10 lg:ml-0 text-center md:text-left lg:w-[60%] mt-10 md:mt-0">
-          <h1 className="text-6xl font-semibold">SantaMatch</h1>
-          <p className="text-lg mt-4">
+          <h1 data-testid = "heroTitle" className="text-6xl font-semibold">SantaMatch</h1>
+          <p data-testid = "heroDescription" className="text-lg mt-4">
             Secret Santa made easy! Add participants, set a budget, share the
             link, and let the gifting begin! No accounts required.
           </p>
@@ -48,10 +48,10 @@ export default function Home() {
         </div>
       </main>
       <div className="md:ml-10 lg:ml-0 text-center md:text-left flex flex-col items-center justify-center lg:w-[60%] mb-20 -mt-20">
-        <h1 className="text-center font-semibold text-2xl">
+        <h1 data-testid="howItWorksTitle" className="text-center font-semibold text-2xl">
           How SantaMatch Works
         </h1>
-        <div className="space-y-6 mt-6 w-3/4">
+        <div data-testid="howItWorksItems" className="space-y-6 mt-6 w-3/4">
           {howItWorksItems.map((item, index) => (
             <div
               key={index}

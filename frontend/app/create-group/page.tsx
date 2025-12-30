@@ -78,7 +78,7 @@ export default function CreateGroup() {
     <div className="flex items-center justify-center font-sans py-15">
       {!loading ? (
         <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col mt-25">
-          <h1 className="text-center text-2xl font-bold mb-6">Create Group</h1>
+          <h1 data-testid="create-group-heading" className="text-center text-2xl font-bold mb-6">Create Group</h1>
           <form onSubmit={handleSubmit} className="bg-sky-200 rounded-lg p-6">
             <label className="block text-sm font-medium mb-1">Group Name</label>
             <input
