@@ -40,7 +40,7 @@ def delete_old_rows(session, table_name, column_name, cutoff_time):
 
 def lambda_handler(event, context):
     column_name = os.getenv("COLUMN_NAME", "created_at")
-    cutoff_time = datetime.now(timezone.utc) - timedelta(days=1)
+    cutoff_time = datetime.now(timezone.utc) - timedelta(days=30)
 
     tables = ["participants", "groups"]
 
