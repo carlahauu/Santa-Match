@@ -15,7 +15,7 @@ async def rate_limiter(request: Request):
     if current_usage == 1:
         r.expire(key, window)
 
-    if current_usage >= limit:
+    if current_usage > limit:
         raise HTTPException(
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
             detail="Too many requests. Please try again in a minute.",

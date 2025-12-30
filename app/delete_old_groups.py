@@ -4,6 +4,7 @@ from sqlalchemy import create_engine, Table, MetaData, delete
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+import ssl
 
 load_dotenv()
 
