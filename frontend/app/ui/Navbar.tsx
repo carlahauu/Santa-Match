@@ -14,7 +14,10 @@ export default function Navbar() {
   return (
     <div className="fixed w-full justify-center items-center flex flex-col mt-10">
       <nav className="bg-sky-200 mx-auto p-4 px-10 sticky z-50 rounded-full md:w-[65%] w-[90%]">
-        <div className="mx-auto flex justify-between items-center">
+        <div
+          data-testid="navbar"
+          className="mx-auto flex justify-between items-center"
+        >
           <Link href="/" className="text-lg font-semibold">
             SantaMatch
           </Link>
@@ -30,7 +33,10 @@ export default function Navbar() {
             ))}
           </div>
           <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button
+              data-testid="mobile-menu-button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
               {isMenuOpen ? 'Close' : 'Menu'}
             </button>
           </div>
@@ -38,7 +44,10 @@ export default function Navbar() {
       </nav>
       <div className="fixed md:w-[65%] mt-30 rounded-b-xl w-[90%] bg-sky-200/50">
         {isMenuOpen && (
-          <div className="flex md:hidden mt-10 mb-3 px-10 flex-col items-end">
+          <div
+            data-testid="mobile-navbar"
+            className="flex md:hidden mt-10 mb-3 px-10 flex-col items-end"
+          >
             {navItems.map((item) => (
               <Link key={item.name} href={item.href} className="w-fit py-1">
                 {item.name}
