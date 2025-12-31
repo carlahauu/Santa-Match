@@ -36,6 +36,33 @@
 
 ---
 
+### Documentation
+#### Architecure Diagram 
+SantaMatch uses a modern three-tier architecture:
+- Client Layer: Next.js frontend with Tailwind CSS styling deployed on Vercel
+- Logic Layer: FastAPI backend containerized with Docker, deployed on Render. Redis is used for rate limiting. Prometheus for endpoint metrics (Scraping /metrics). 
+- Data Layer: PostgreSQL database (hosted on Neon) 
+- **Serverless Maintenance**: AWS Lambda triggered by Amazon EventBridge for automated cleanup (deletes old groups from database)
+
+All code changes trigger GitHub Actions CI pipeline with:
+- Prettier code formatting check 
+- Pytest integration tests 
+- Cypress E2E tests
+
+For more details, refer to the diagram below: 
+
+![Architecture Diagram](docs/architecture-diagram.png)
+
+#### Use Case Diagram 
+
+To understand how different users interact with SantaMatch, refer to the use case diagram below.
+
+![Use Case Diagram](docs/use-case-diagram.png)
+
+Full API Documentation: https://santa-match.onrender.com/docs (Swagger UI) 
+
+---
+
 ### Key Design Decisions 
 #### Why No Authentication? 
 - Reduced friction for casual users
@@ -68,23 +95,6 @@
 - AWS Lambda
 - Prometheus
 - GitHub Actions
-
----
-
-### Documentation
-To understand how different users interact with SantaMatch, refer to the use case diagram below.
-
-![Use Case Diagram](docs/use-case-diagram.png)
-
-Full API Documentation: https://santa-match.onrender.com/docs (Swagger UI) 
-
----
-
-### CI Pipelines 
-GitHub Actions automatically runs:
-- All Pytest tests
-- All Cypress E2E tests
-- Prettier code formatting checks
 
 --- 
 ### Getting Started 
