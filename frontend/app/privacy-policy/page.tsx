@@ -4,7 +4,7 @@ import Link from 'next/link';
 const contentSections = [
   {
     name: '',
-    content: 'Effective Date: December 29, 2025',
+    content: 'Effective Date: December 30, 2025',
   },
   {
     name: '',
@@ -15,6 +15,29 @@ const contentSections = [
     name: 'Information Collection And Use',
     content:
       'SantaMatch values your privacy. We do not use advertising networks or third-party analytics tools that collect personal data. To provide the core functionality of the service, SantaMatch stores participant names entered by users when creating a group. This information is used solely to provide and operate the group functionality of our service and is not shared with third parties. Groups and their associated participant names are stored in our PostgreSQL database for 30 days, after which they are automatically deleted. If a user would like their group deleted sooner, they may contact us and we will remove it from our database upon request. Separately, SantaMatch collects anonymous, aggregated usage metrics (such as the total number of groups created) through Prometheus. These metrics do not include participant names or any other personal information and cannot be used to identify individual users.',
+  },
+  {
+    name: 'Third-Party Hosting and Services',
+    content: (
+      <div>
+        <p>
+          SantaMatch uses third-party hosting platforms to operate the service:
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Vercel for the frontend</li>
+          <li>Render for the backend</li>
+          <li>Neon for database</li>
+        </ul>
+        <p>
+          These providers may process operational data necessary to deliver the
+          service, such as server logs, request metadata, error reports,
+          performance metrics, and database operations. No personal data is
+          intentionally shared with these providers for marketing or analytics
+          purposes. All operational data is handled according to the providers’
+          privacy and security policies.
+        </p>
+      </div>
+    ),
   },
   {
     name: 'Changes To This Privacy Policy',
