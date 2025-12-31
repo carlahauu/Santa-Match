@@ -1,13 +1,19 @@
-<h1 align="center">Santa Match</h1>
-  
-[![Backend CI](https://github.com/carlahauu/Santa-Match/actions/workflows/backend.yml/badge.svg)](https://github.com/carlahauu/Santa-Match/actions/workflows/backend.yml)
-[![Frontend CI](https://github.com/carlahauu/Santa-Match/actions/workflows/frontend.yml/badge.svg)](https://github.com/carlahauu/Santa-Match/actions/workflows/frontend.yml)
-![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.127.0-009688?logo=fastapi)
-![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js)
-![Next.js](https://img.shields.io/badge/Next.js-16.1.1-black?logo=next.js)
-![React](https://img.shields.io/badge/React-19.2.3-61DAFB?logo=react)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-336791?logo=postgresql)
+<h1 align="center">SantaMatch</h1>
+
+<p align="center">
+  <a href="https://github.com/carlahauu/Santa-Match/actions/workflows/backend.yml">
+      <img src="https://github.com/carlahauu/Santa-Match/actions/workflows/backend.yml/badge.svg" alt="Backend CI">
+  </a>
+  <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/fastapi/fastapi">
+      <img src="https://github.com/carlahauu/Santa-Match/actions/workflows/frontend.yml/badge.svg" alt="Frontend CI">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python" alt="Python Version">
+  <img src="https://img.shields.io/badge/FastAPI-0.127.0-009688?logo=fastapi" alt="FastAPI Version">
+  <img src="https://img.shields.io/badge/Node.js-20+-339933?logo=node.js" alt="Node.js Version">
+  <img src="https://img.shields.io/badge/PostgreSQL-14+-336791?logo=postgresql" alt="PostgreSQL Version">
+  <img src="https://img.shields.io/badge/Next.js-16.1.1-black?logo=next.js" alt="Next.js Version">
+  <img src="https://img.shields.io/badge/React-19.2.3-61DAFB?logo=react" alt="React version">
+</p>
 
 
 <div align="center"><img width="950" height="376" alt="image" src="https://github.com/user-attachments/assets/ff238113-6879-466e-ac24-6510137c3dbc" /></div>
