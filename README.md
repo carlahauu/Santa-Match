@@ -1,3 +1,15 @@
+<h1 align="center">Santa Match</h1>
+  
+![Backend CI](https://img.shields.io/github/actions/workflow/status/carlahauu/Santa-Match/main.yml?label=backend-tests)
+![Frontend CI](https://img.shields.io/github/actions/workflow/status/carlahauu/Santa-Match/format.yml?label=frontend-tests)
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.127.0-009688?logo=fastapi)
+![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js)
+![Next.js](https://img.shields.io/badge/Next.js-16.1.1-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19.2.3-61DAFB?logo=react)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-336791?logo=postgresql)
+
+
 <div align="center"><img width="950" height="376" alt="image" src="https://github.com/user-attachments/assets/ff238113-6879-466e-ac24-6510137c3dbc" /></div>
 
 <div>
@@ -67,3 +79,43 @@ GitHub Actions automatically runs:
 - All Pytest tests
 - All Cypress E2E tests
 - Prettier code formatting checks
+
+--- 
+### Getting Started 
+#### Preqrequisites 
+- Node.js
+- Python
+- PostgreSQL
+
+1. Clone the repository
+```bash
+git clone https://github.com/carlahauu/Santa-Match.git
+cd Santa-Match
+```
+
+2. Set up environment variables
+```bash
+# Create an .env file with the following variables: 
+POSTGRES_DB = 
+POSTGRES_USER = 
+POSTGRES_PASSWORD = 
+POSTGRES_HOST = 
+```
+
+3. Run locally 
+
+Backend:
+```bash
+cd app
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload 
+```
+
+Frontend:
+```bash
+cd frontend
+npm install
+npm run dev
+``` 
