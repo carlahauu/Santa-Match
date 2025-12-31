@@ -1,7 +1,7 @@
 <h1 align="center">Santa Match</h1>
   
-![Backend CI](https://img.shields.io/github/actions/workflow/status/carlahauu/Santa-Match/main.yml?label=backend-tests)
-![Frontend CI](https://img.shields.io/github/actions/workflow/status/carlahauu/Santa-Match/format.yml?label=frontend-tests)
+![Backend CI](https://img.shields.io/github/actions/workflow/status/carlahauu/Santa-Match/backend.yml?label=backend-tests)
+![Frontend CI](https://img.shields.io/github/actions/workflow/status/carlahauu/Santa-Match/frontend.yml?label=frontend-tests)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.127.0-009688?logo=fastapi)
 ![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js)
