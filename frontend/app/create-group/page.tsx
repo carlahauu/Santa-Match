@@ -9,7 +9,7 @@ interface Participant {
 
 export default function CreateGroup() {
   const [groupName, setGroupName] = useState('');
-  const [budget, setBudget] = useState('');
+  const [budget, setBudget] = useState('0');
   const [participants, setParticipants] = useState<Participant[]>([
     { name: '', exclude: '' },
     { name: '', exclude: '' },
