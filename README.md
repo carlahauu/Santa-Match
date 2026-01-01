@@ -98,10 +98,6 @@ Full API Documentation: https://santa-match.onrender.com/docs (Swagger UI)
 
 --- 
 ### Getting Started 
-#### Preqrequisites 
-- Node.js
-- Python
-- PostgreSQL
 
 1. Clone the repository
 ```bash
@@ -115,7 +111,11 @@ cd Santa-Match
 POSTGRES_DB = 
 POSTGRES_USER = 
 POSTGRES_PASSWORD = 
-POSTGRES_HOST = 
+POSTGRES_HOST =
+REDIS_HOST = 
+REDIS_PASSWORD = 
+REDIS_PORT = 
+REDIS_USER = 
 ```
 
 3. Run locally 
