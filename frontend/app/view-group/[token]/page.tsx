@@ -45,19 +45,14 @@ export default function ViewMatch() {
 
         if (!res.ok) {
           if (res.status === 404) {
-            throw new Error(
-              `Group was not found with token: ${token}. Please ensure the link is correct.`
+            setError(
+              'Error: Group was not found with token: ${token}. Please ensure the link is correct.'
             );
           }
-          throw new Error('Something went wrong');
         }
 
         const data = await res.json();
         setGroupData(data);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        }
       } finally {
         setLoading(false);
       }
@@ -89,7 +84,9 @@ export default function ViewMatch() {
       {!loading ? (
         <>
           {error ? (
-            <p>{error}</p>
+            <p data-testid="errorMsg" className="mt-40">
+              {error}
+            </p>
           ) : (
             <main className="flex md:w-[60%] lg:w-[40%] w-[85%] flex-col">
               <h1 className="text-2xl font-bold text-center mt-30">
@@ -108,22 +105,29 @@ export default function ViewMatch() {
                 can view their match!
               </p>
               <div className="flex mb-3 space-x-3">
-                <p className="flex-1 px-3 py-3 rounded-lg bg-sky-200 text-sm">
+                <p
+                  data-testid="groupLink"
+                  className="flex-1 px-3 py-3 rounded-lg bg-sky-200 text-sm"
+                >
                   {url}
                 </p>
                 <button
+                  data-testid="copyLinkBtn"
                   onClick={handleCopy}
                   className="bg-sky-700 hover:bg-sky-800 text-white font-semibold py-3 px-3 rounded-lg"
                 >
                   {copied ? 'Link Copied!' : 'Copy Link'}
                 </button>
               </div>
-              <div className="mt-4">
+              <div data-testid="participants" className="mt-4">
                 {groupData?.participants.map((participant, index) => (
                   <div key={index}>
                     <div className="flex flex-row w-full justify-between mb-3">
                       <p className="text-lg mt-1">{participant.name}</p>
-                      <div className="flex space-x-3">
+                      <div
+                        data-testid={`viewStatus-${index}`}
+                        className="flex space-x-3"
+                      >
                         {participant.revealed ? (
                           <>
                             <button className="bg-sky-200 text-sm text-black px-3 rounded-full py-2">
@@ -164,7 +168,10 @@ export default function ViewMatch() {
         </main>
       )}
       {selectedParticipant && (
-        <div className="fixed bg-sky-200 flex items-center rounded-lg justify-center z-50 p-4 mt-25">
+        <div
+          data-testid="viewMatchModal"
+          className="fixed bg-sky-200 flex items-center rounded-lg justify-center z-50 p-4 mt-25"
+        >
           <div className="p-8 max-w-sm w-full text-center">
             <h2 className="text-xl font-bold mb-4 text-black">
               Are you {selectedParticipant.name}?
