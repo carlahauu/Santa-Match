@@ -37,7 +37,7 @@ describe('Footer', () => {
 
     cy.get('[data-testid="footer"]')
       .contains('Carla Hau')
-      .should('have.attr', 'href', 'https://www.carlahau.com/');
+      .should('have.attr', 'href', 'https://carlahau.com/');
   });
 
   it('should persist footer across pages', () => {
