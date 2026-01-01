@@ -84,7 +84,11 @@ export default function CreateGroup() {
           >
             Create Group
           </h1>
-          <form data-testid="createGroupForm" onSubmit={handleSubmit} className="bg-sky-200 rounded-lg p-6">
+          <form
+            data-testid="createGroupForm"
+            onSubmit={handleSubmit}
+            className="bg-sky-200 rounded-lg p-6"
+          >
             <label className="block text-sm font-medium mb-1">Group Name</label>
             <input
               data-testid="groupNameInput"
@@ -153,7 +157,12 @@ export default function CreateGroup() {
             </button>
 
             {error && (
-              <p data-testid="errorMsg" className="text-red-600 text-sm font-medium">{error}</p>
+              <p
+                data-testid="errorMsg"
+                className="text-red-600 text-sm font-medium"
+              >
+                {error}
+              </p>
             )}
             <button
               data-testid="createGroupBtn"
@@ -166,7 +175,10 @@ export default function CreateGroup() {
           </form>
         </main>
       ) : (
-        <main data-testid="loadingMsg" className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center mt-40">
+        <main
+          data-testid="loadingMsg"
+          className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center mt-40"
+        >
           <div className="flex space-x-2 text-sky-900">
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
