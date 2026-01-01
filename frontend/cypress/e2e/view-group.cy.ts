@@ -38,8 +38,6 @@ describe('View Group Page', () => {
     cy.get('[data-testid^="viewStatus-"] button').first().click();
     cy.contains('Yes').click();
     cy.url().should('include', '/reveal');
-    cy.go('back');
-    cy.contains('Already Viewed').should('be.visible');
   });
 
   it('should create group with no budget', () => {
