@@ -99,7 +99,7 @@ export default function CreateGroup() {
             />
 
             <label className="block text-sm font-medium mb-1">
-              Budget (optional)
+              Budget (set to 0 if no budget)
             </label>
             <input
               data-testid="budgetInput"
