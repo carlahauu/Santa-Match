@@ -84,9 +84,14 @@ export default function CreateGroup() {
           >
             Create Group
           </h1>
-          <form onSubmit={handleSubmit} className="bg-sky-200 rounded-lg p-6">
+          <form
+            data-testid="createGroupForm"
+            onSubmit={handleSubmit}
+            className="bg-sky-200 rounded-lg p-6"
+          >
             <label className="block text-sm font-medium mb-1">Group Name</label>
             <input
+              data-testid="groupNameInput"
               className="w-full mb-4 px-3 py-2 rounded-lg bg-white"
               placeholder="Secret Santa 2025"
               onChange={(e) => setGroupName(e.target.value)}
@@ -97,6 +102,7 @@ export default function CreateGroup() {
               Budget (optional)
             </label>
             <input
+              data-testid="budgetInput"
               className="w-full mb-4 px-3 py-2 rounded-lg bg-white"
               placeholder="10"
               value={budget}
@@ -106,10 +112,11 @@ export default function CreateGroup() {
             <label className="block text-sm font-medium mb-2">
               Participants (min. 3)
             </label>
-            <div className="space-y-3">
+            <div data-testid="participantInput" className="space-y-3">
               {participants.map((participant, index) => (
                 <div key={index} className="flex space-x-3">
                   <input
+                    data-testid={`participantInput-${index}`}
                     className="flex-1 w-[100px] px-3 py-2 rounded-lg bg-white mb-2 sm:mb-0"
                     placeholder="Name"
                     value={participant.name}
@@ -119,6 +126,7 @@ export default function CreateGroup() {
                     required
                   />
                   <input
+                    data-testid={`exclusionInput-${index}`}
                     className="flex-1 w-[150px] px-3 py-2 rounded-lg bg-white mb-2 sm:mb-0"
                     placeholder="Don't pair with"
                     value={participant.exclude}
@@ -127,6 +135,7 @@ export default function CreateGroup() {
                     }
                   />
                   <button
+                    data-testid="removeParticipantBtn"
                     type="button"
                     onClick={() => removeParticipant(index)}
                     disabled={participants.length <= 3}
@@ -139,6 +148,7 @@ export default function CreateGroup() {
             </div>
 
             <button
+              data-testid="addParticipantBtn"
               type="button"
               onClick={addParticipant}
               className="opacity-55 hover:opacity-80 hover:cursor-pointer mt-4 w-full bg-sky-700 hover:bg-sky-800 text-white font-semibold rounded-lg py-2 transition"
@@ -147,9 +157,15 @@ export default function CreateGroup() {
             </button>
 
             {error && (
-              <p className="text-red-600 text-sm font-medium">{error}</p>
+              <p
+                data-testid="errorMsg"
+                className="text-red-600 text-sm font-medium"
+              >
+                {error}
+              </p>
             )}
             <button
+              data-testid="createGroupBtn"
               type="submit"
               disabled={loading}
               className="mt-4 w-full bg-sky-900 hover:cursor-pointer hover:bg-sky-950 text-white font-semibold rounded-lg py-2 transition"
@@ -159,7 +175,10 @@ export default function CreateGroup() {
           </form>
         </main>
       ) : (
-        <main className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center mt-40">
+        <main
+          data-testid="loadingMsg"
+          className="flex md:w-[60%] lg:w-[40%] w-[90%] flex-col items-center justify-center mt-40"
+        >
           <div className="flex space-x-2 text-sky-900">
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
             <div className="rounded-full motion-safe:animate-bounce border-1 size-5"></div>
