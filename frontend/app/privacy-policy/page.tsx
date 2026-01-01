@@ -42,7 +42,7 @@ const contentSections = [
   {
     name: 'Changes To This Privacy Policy',
     content:
-      'We nay update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. We will provide a prominent notice on our website prior to the change becoming effective when they are posted on this page.',
+      'We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. We will provide a prominent notice on our website prior to the change becoming effective when they are posted on this page.',
   },
   {
     name: 'Contact Us',
@@ -55,16 +55,29 @@ export default function PrivacyPolicy() {
   return (
     <div className="flex flex-col font-sans items-center justify-center">
       <main className="flex md:w-[60%] lg:w-[40%] w-[85%] flex-col mt-40">
-        <h1 className="text-left text-2xl font-bold mb-6">Privacy Policy</h1>
-        <div className="space-y-5 mb-10">
+        <h1
+          data-testid="privacyPolicyHeading"
+          className="text-left text-2xl font-bold mb-6"
+        >
+          Privacy Policy
+        </h1>
+        <div data-testid="privacyPolicyContent" className="space-y-5 mb-10">
           {contentSections.map((item, index) => (
             <div
+              data-testid={`privacyPolicyContent-${index}`}
               key={index}
               className="text-left rounded-2xl items-center flex flex-row"
             >
               <div>
-                <h1 className="font-semibold text-lg">{item.name}</h1>
-                <h1>{item.content}</h1>
+                <h1
+                  data-testid={`privacyPolicySectionTitle-${index}`}
+                  className="font-semibold text-lg"
+                >
+                  {item.name}
+                </h1>
+                <h1 data-testid={`privacyPolicySectionContent-${index}`}>
+                  {item.content}
+                </h1>
               </div>
             </div>
           ))}
