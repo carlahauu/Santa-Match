@@ -31,13 +31,13 @@ describe('Footer', () => {
     cy.get('[data-testid="footer"]').contains('Contact Us').click();
     cy.url().should('include', '/contact-us');
 
-    cy.get('[data-testid="footer"]').contains('GitHub Repo').click();
-    cy.url().should('eq', 'https://github.com/carlahauu/Santa-Match');
+    cy.get('[data-testid="footer"]')
+      .contains('GitHub Repo')
+      .should('have.attr', 'href', 'https://github.com/carlahauu/Santa-Match');
 
-    cy.go('back');
-
-    cy.get('[data-testid="footer"]').contains('Carla Hau').click();
-    cy.url().should('eq', 'https://www.carlahau.com/');
+    cy.get('[data-testid="footer"]')
+      .contains('Carla Hau')
+      .should('have.attr', 'href', 'https://www.carlahau.com/');
   });
 
   it('should persist footer across pages', () => {
