@@ -77,16 +77,29 @@ export default function TermsOfService() {
   return (
     <div className="flex flex-col font-sans items-center justify-center">
       <main className="flex md:w-[60%] lg:w-[40%] w-[85%] flex-col mt-40">
-        <h1 className="text-left text-2xl font-bold mb-6">Terms of Service</h1>
-        <div className="space-y-5 mb-10">
+        <h1
+          data-testid="termsOfServiceHeading"
+          className="text-left text-2xl font-bold mb-6"
+        >
+          Terms of Service
+        </h1>
+        <div data-testid="termsOfServiceSections" className="space-y-5 mb-10">
           {contentSections.map((item, index) => (
             <div
+              data-testid={`termsOfServiceContent-${index}`}
               key={index}
               className="text-left rounded-2xl items-center flex flex-row"
             >
               <div>
-                <h2 className="font-semibold text-lg">{item.name}</h2>
-                <h1>{item.content}</h1>
+                <h2
+                  data-testid={`termsOfServiceSectionTitle-${index}`}
+                  className="font-semibold text-lg"
+                >
+                  {item.name}
+                </h2>
+                <h1 data-testid={`termsOfServiceSectionContent-${index}`}>
+                  {item.content}
+                </h1>
               </div>
             </div>
           ))}
