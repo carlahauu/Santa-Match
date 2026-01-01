@@ -9,7 +9,7 @@ interface Participant {
 
 export default function CreateGroup() {
   const [groupName, setGroupName] = useState('');
-  const [budget, setBudget] = useState('');
+  const [budget, setBudget] = useState('0');
   const [participants, setParticipants] = useState<Participant[]>([
     { name: '', exclude: '' },
     { name: '', exclude: '' },
@@ -99,7 +99,7 @@ export default function CreateGroup() {
             />
 
             <label className="block text-sm font-medium mb-1">
-              Budget (optional)
+              Budget (set to 0 if no budget)
             </label>
             <input
               data-testid="budgetInput"
