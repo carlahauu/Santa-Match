@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'SantaMatch',
-  description: 'Secret Santa made easy! Add participants, set a budget, share the link, and let the gifting begin! No accounts required.',
+  description:
+    'Secret Santa made easy! Add participants, set a budget, share the link, and let the gifting begin! No accounts required.',
 };
 
 export default function RootLayout({
