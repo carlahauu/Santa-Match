@@ -7,9 +7,9 @@ load_dotenv()
 
 r = redis.Redis(
     host=os.getenv("REDIS_HOST"),
-    username="flying-ant",
+    username=os.getenv("REDIS_USER"),
     password=os.getenv("REDIS_PASSWORD"),
-    port="15351",
+    port=os.getenv("REDIS_PORT"),
     db=0,
     decode_responses=True,
     socket_timeout=2,
