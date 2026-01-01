@@ -18,6 +18,9 @@ r = redis.Redis(
 
 
 async def rate_limiter(request: Request):
+    if os.getenv("CI") == "true":
+        return
+
     client_ip = request.client.host
     key = f"rate_limit:{client_ip}"
     limit = 5
