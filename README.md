@@ -42,7 +42,7 @@ SantaMatch uses a modern three-tier architecture:
 - Client Layer: Next.js frontend with Tailwind CSS styling deployed on Vercel
 - Logic Layer: FastAPI backend containerized with Docker, deployed on Render. Redis is used for rate limiting. Prometheus for endpoint metrics (Scraping /metrics). 
 - Data Layer: PostgreSQL database (hosted on Neon) 
-- **Serverless Maintenance**: AWS Lambda triggered by Amazon EventBridge for automated cleanup (deletes old groups from database)
+- Serverless Maintenance: AWS Lambda triggered by Amazon EventBridge for automated cleanup (deletes old groups from database)
 
 All code changes trigger GitHub Actions CI pipeline with:
 - Prettier code formatting check 
