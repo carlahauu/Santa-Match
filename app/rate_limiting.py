@@ -1,7 +1,20 @@
 import redis
-from fastapi import FastAPI, status, HTTPException, Request
+from fastapi import status, HTTPException, Request
+import os
+from dotenv import load_dotenv
 
-r = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
+load_dotenv()
+
+r = redis.Redis(
+    host=os.getenv("REDIS_HOST"),
+    username="flying-ant",
+    password=os.getenv("REDIS_PASSWORD"),
+    port="15351",
+    db=0,
+    decode_responses=True,
+    socket_timeout=2,
+    socket_connect_timeout=2,
+)
 
 
 async def rate_limiter(request: Request):
