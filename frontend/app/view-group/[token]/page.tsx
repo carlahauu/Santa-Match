@@ -40,7 +40,7 @@ export default function ViewMatch() {
 
       try {
         const res = await fetch(
-          `https://santa-match.onrender.com/groups/${token}`
+          `https://santa-match.onrender.com/groups/${token}/`
         );
 
         if (!res.ok) {

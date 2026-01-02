@@ -9,7 +9,7 @@ export default function ViewMatch() {
   const token = params.token;
 
   useEffect(() => {
-    fetch(`https://santa-match.onrender.com/participants/reveal/${token}`, {
+    fetch(`https://santa-match.onrender.com/participants/reveal/${token}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
