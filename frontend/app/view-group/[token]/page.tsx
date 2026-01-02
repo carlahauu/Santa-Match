@@ -49,6 +49,11 @@ export default function ViewMatch() {
               'Error: Group was not found with token: ${token}. Please ensure the link is correct.'
             );
           }
+          if (res.status == 429) {
+            setError(
+              'Error: Too many requests. Please try again after a minute.'
+            );
+          }
         }
 
         const data = await res.json();
