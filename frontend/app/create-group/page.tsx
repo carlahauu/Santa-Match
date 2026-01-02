@@ -45,7 +45,7 @@ export default function CreateGroup() {
     setLoading(true);
 
     try {
-      const response = await fetch('https://santa-match.onrender.com/groups', {
+      const response = await fetch('https://santa-match.onrender.com/groups/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
