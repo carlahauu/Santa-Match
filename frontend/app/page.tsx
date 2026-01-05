@@ -5,7 +5,7 @@ const howItWorksItems = [
   {
     name: 'Create Group',
     content:
-      'Create your Secret Santa group by adding a group name, budget, and participants! Bonus: You can choose which participants to not match each other with!',
+      'Create your Secret Santa group by adding a group name, budget, and participants! Bonus: You can choose which participants not to match each other with!',
   },
   {
     name: 'Share Group Link',
@@ -15,7 +15,7 @@ const howItWorksItems = [
   {
     name: 'View Match',
     content:
-      'Participants click on "View Match" next to their name to view how they will be gifting to! Note: A match can only be seen once!',
+      'Participants click on "View Match" next to their name to view who they will be gifting to! Note: A match can only be seen once!',
   },
   {
     name: 'Let the gifting begin!',
