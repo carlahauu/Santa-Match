@@ -134,4 +134,8 @@ Frontend:
 cd frontend
 npm install
 npm run dev
-``` 
+```
+
+---
+
+⭐ If you like this project, consider giving it a star!
